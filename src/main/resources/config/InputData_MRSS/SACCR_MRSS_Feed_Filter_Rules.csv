@@ -1,0 +1,2 @@
+﻿Feed,Columns,Rule,Target,Value,Action,EffectiveDate,ExpirationDate
+saccr_ex_bbg,,"{REF2(""ERROR CODE"")!=""0""}",,,Filter,,

@@ -1,0 +1,8 @@
+﻿Feed,Level,Severity,Rule,Attribute,Operator,Value,EffectiveDate,ExpirationDate,Validation Type,Threshold Type,Min Max,Comment,Notification
+trade_override_set,Attribute,Warning,"{REF2(""CCP_IND"") == 'N' if REF2(""TRADE_ID"")[-7:] == '_client' else True}",CCP_IND,,,,,Warning,Absolute,Max,"If ""TRADE_ID"" end with ”_client”, ""CCP_IND"" must be ""N"".",CCRCapital@bmo.com
+trade_override_set,Attribute,Warning,"{REF2(""QCCP_IND"") == 'N' if REF2(""TRADE_ID"")[-7:] == '_client' else True}",QCCP_IND,,,,,Warning,Absolute,Max,"If ""TRADE_ID"" end with ”_client”, ""QCCP_IND"" must be ""N"".",CCRCapital@bmo.com
+trade_override_set,Attribute,Warning,"{REF2(""CLNT_LEG_IND"") == 'Y' if REF2(""TRADE_ID"")[-7:] == '_client' else True}",CLNT_LEG_IND,,,,,Warning,Absolute,Max,"If ""TRADE_ID"" end with ”_client”, ""CLNT_LEG_IND"" must be ""Y"".",CCRCapital@bmo.com
+trade_override_set,Attribute,Warning,"{REF2(""CCP_IND"") == 'Y' if REF2(""TRADE_ID"")[-4:] == '_ccp' else True}",CCP_IND,,,,,Warning,Absolute,Max,"If ""TRADE_ID"" end with ”_ccp”, ""CCP_IND"" must be ""Y"".",CCRCapital@bmo.com
+trade_override_set,Attribute,Warning,"{REF2(""CLNT_LEG_IND"") == 'N' if REF2(""TRADE_ID"")[-4:] == '_ccp' else True}",CLNT_LEG_IND,,,,,Warning,Absolute,Max,"If ""TRADE_ID"" end with ”_ccp”, ""CLNT_LEG_IND"" must be ""N"".",CCRCapital@bmo.com
+trade_override_set,Attribute,Warning,NONEMPTY,UEN,,,,,Warning,Absolute,Max,"""UEN"" must be populated.",CCRCapital@bmo.com
+trade_override_set,Attribute,Warning,"{ISNUMBER(REF2(""UEN"")) if NONEMPTY(REF2(""UEN"")) else True}",UEN,,,,,Warning,Absolute,Max,"""UEN"" must be a number.",CCRCapital@bmo.com

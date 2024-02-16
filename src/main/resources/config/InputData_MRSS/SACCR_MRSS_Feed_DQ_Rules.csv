@@ -1,0 +1,2 @@
+﻿Feed,Level,Severity,Rule,Attribute,Operator,Value,EffectiveDate,ExpirationDate,Validation Type,Threshold Type,Min Max,Comment,Notification
+saccr_ex_bbg,Feed,Warning,RECORDCOUNT,,lt,200,,,,,,(count of records with ERROR CODE Not equal to 0) > 200,CCRCapital@bmo.com

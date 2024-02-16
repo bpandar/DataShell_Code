@@ -1,0 +1,13 @@
+LegalEntity|Legal Entity Code
+BANK OF MONTREAL|BMO
+BMO CAPITAL MARKETS CORP|BCMC
+BMO Capital Markets Limited|BCML
+BMO HARRIS BANK N.A.|HARRIS
+BMO Harris Investment Company LLC|HARRIS_INVESTMENT
+BMO Harris Investment Corp.|HARRIS_INVESTMENT
+BMO Ireland, PLC|BMO_IRELAND
+BMO Reinsurance Limited|BMO_REINSURANCE
+BMO Trust Company|MCCT2
+Bank of Montreal (China) Co. Ltd.|BMO_CHINA
+Bank of Montreal Europe plc|BMO_IRELAND
+BMO Nesbitt Burns Inc.|NESBITT

@@ -1,0 +1,13 @@
+﻿Feed,Columns,Rule,Target,Value,Action,EffectiveDate,ExpirationDate
+InternalCollateralAgreements,Attributes\Active,Yes,,,Filter,,
+RegulatoryCollateralAgreements,Attributes\Active,Yes,,,Filter,,
+CSA_CPTY_exposure,Contract Type,CSA,,,Filter,,
+CSA_CPTY_exposure,Contract Type,CSA - REG VM,,,Filter,,
+CSA_CPTY_exposure,Contract Type,GAS EDI,,,Filter,,
+CSA_CPTY_exposure,Contract Type,PFCC,,,Filter,,
+CSA_CPTY_exposure,Contract Type,NAESB,,,Filter,,
+CMG_Agreements_CSA,Contract Type,CSA,,,Filter,,
+CMG_Agreements_CSA,Contract Type,CSA - REG VM,,,Filter,,
+CMG_Agreements_CSA,Contract Type,GAS EDI,,,Filter,,
+CMG_Agreements_CSA,Contract Type,PFCC,,,Filter,,
+CMG_Agreements_CSA,Contract Type,NAESB,,,Filter,,

@@ -1,0 +1,29 @@
+﻿Feed,Level,Severity,Rule,Attribute,Operator,Value,EffectiveDate,ExpirationDate,Validation Type,Threshold Type,Min Max,Comment,Notification
+saccr_report_OSFI-BFG-NEW,Feed,Warning,RECORDCOUNT,,GE,50000,,,Threshold,Min,Min,"Number of records in the SACCR exposure file cannot be less than 50,000",CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Feed,Warning,FILESIZE_DELTA_PERCENT,,LE,30,,,Threshold,Percentage,Max,SACCR exposure file size is at most 30% change day over day,CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Critical,NONEMPTY,SRC_SYS_CD,,,,,Error,Absolute,Max,SRC_SYS_CD cannot be null (Mandatory),CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Critical,NONEMPTY,TRADE_ID,,,,,Error,Absolute,Max,SRC_SYS_CD cannot be null (Mandatory),CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Critical,"{REF2(""CALC_TYPE"") in ['OSFI-BFG-NEW']}",CALC_TYPE,,,,,Error,Absolute,Max,"CALC_TYPE = ""OSFI-BFG-NEW"" or file may not be loaded correctly",CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Critical,NONEMPTY,INT_EXT_CD,,,,,Error,Absolute,Max,INT_EXT_CD cannot be null,CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Warning,NONEMPTY,PRODUCT,,,,,Warning,Absolute,Max,PRODUCT cannot be null,CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Warning,ISNUMBER,MTM,,,,,Warning,Absolute,Max,MTM is a numeric attribute,CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Warning,ISNUMBER,SA_NOTIONAL,,,,,Warning,Absolute,Max,SA_NOTIONAL is a numeric attribute,CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Warning,ISNUMBER,RC,,,,,Warning,Absolute,Max,RC is a numeric attribute,CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Warning,ISNUMBER,PFE,,,,,Warning,Absolute,Max,PFE is a numeric attribute,CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Warning,ISNUMBER,RC_LR,,,,,Warning,Absolute,Max,RC_LR is a numeric attribute,CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Warning,ISNUMBER,PFE_LR,,,,,Warning,Absolute,Max,PFE_LR is a numeric attribute,CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Warning,ISNUMBER,EAD,,,,,Warning,Absolute,Max,EAD is a numeric attribute,CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Warning,ISNUMBER,EAD_LR,,,,,Warning,Absolute,Max,EAD_LR is a numeric attribute,CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Warning,ISNUMBER,RWA,,,,,Warning,Absolute,Max,RWA is numeric attribute,CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Warning,"{NONEMPTY(REF2(""NOTIONAL"")) if REF2(""SRC_SYS_CD"") in ['GMI','GFI'] else True}",SRC_SYS_CD,,,,,Warning,Absolute,Max,NOTIONAL is a non-empty attribute for GMI and GFI trades ,CCRCapital@bmo.com
+saccr_report_OSFI-BFG-NEW,Attribute,Warning,"{len(REF2(""MTM_CCY"")) == 3}",MTM_CCY,,,,,Warning,Absolute,Max,MTM_CCY has 3 characters.,CCRCapital@bmo.com
+CM_Finance,Feed,Critical,RECORDCOUNT_DELTA_PERCENT,,le,20,,,Threshold,Percentage,,Finance file size is at most 20% change month over month,CCRCapital@bmo.com
+CM_Finance,Feed,Critical,RECORDCOUNT,,ge,150000,,,Threshold,Absolute,,Number of records in finance data cannot be less than 150000,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,NONEMPTY,GL,,,,,Warning,Absolute,,GL cannot be null,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,NONEMPTY,RespCentre,,,,,Warning,Absolute,,RespCentre cannot be null,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,NONEMPTY,BookingTransit,,,,,Warning,Absolute,,BookingTransit cannot be null,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,NONEMPTY,Currency,,,,,Warning,Absolute,,Currency cannot be null,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,"{ISNUMBER(CDE_NPV.replace(',',''))}",CDE_NPV,,,,,Warning,Absolute,,CDE_NPV should be float,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,"{ISNUMBER(TC_NPV.replace(',',''))}",TC_NPV,,,,,Warning,Absolute,,TC_NPV should be float,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,"{ISNUMBER(CDE_Notional_Value.replace(',',''))}",CDE_Notional_Value,,,,,Warning,Absolute,,CDE_Notional_Value should be float,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,"{ISNUMBER(TC_Notional_Value.replace(',',''))}",TC_Notional_Value,,,,,Warning,Absolute,,TC_Notional_Value should be float,CCRCapital@bmo.com

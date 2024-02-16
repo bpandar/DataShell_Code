@@ -1,0 +1,11 @@
+RISK_TYPE
+Risk_IRCurve
+Risk_Inflation
+Risk_IRVol
+Risk_Credit
+Risk_Equity
+Risk_EquityVol
+Risk_FX
+Risk_FXVol
+Risk_Commodity
+Risk_CommodityVol

@@ -1,0 +1,126 @@
+#!/bin/bash
+# Run commands :
+# source ~/.bashrc
+# sh Run_InputData_Collateral.sh 20220630
+
+# 20220630 format
+ExecDate=$1
+
+INPUT_DIR=/apps/data/cmrods/input/inputData
+OUTPUT_DIR=/apps/data/cmrods/output/inputData
+PREV_DIR=/apps/data/cmrods/prev
+PROPERTIES_DIR=/apps/cmrods/sacva_apms/conf/InputData_Collateral
+STATIC_DATA=/apps/data/cmrods/staticdata
+TEMP_DIR=/apps/data/cmrods/tmp
+JAR_DIR=/apps/cmrods/sacva_apms/lib
+
+
+date_fmt=`date -d "${ExecDate}" '+%Y-%m-%d'`
+# Download File from SDR, Date 
+echo "############################"
+echo "Download File from SDR, Date: $date_fmt "
+echo "############################"
+java -Dlog4j.configuration=file://${PROPERTIES_DIR}/InputData_Collateral_log.properties -cp ${JAR_DIR}/OdsToolsMain-1.1.5_2.12-SNAPSHOT.jar com.bmo.cmrods.odstools.main.ODSToolsMain runDBAPIAndSaveToFile ${PROPERTIES_DIR}/odsdbtools_sdr.properties api_collateral ${INPUT_DIR}/V_CALYPSO_MPE_POS_LVL_COL_${ExecDate}.csv "|" DATA_DATE=${date_fmt}
+
+
+
+sleep 2
+
+# Perform DQ on L0
+echo "############################"
+echo "Perform DQ on L0: "
+echo "############################"
+java -DBUS_DATE=${ExecDate} -Dlog4j.configuration=file://${PROPERTIES_DIR}/InputData_Collateral_log.properties -cp ${JAR_DIR}/OdsToolsMain-1.1.5_2.12-SNAPSHOT.jar com.bmo.cmrods.odstools.main.ODSToolsMain rulesBasedFeedValidate ${PROPERTIES_DIR}/v_calypso_mpe_pos_DQ.properties
+
+sleep 2
+
+sleep 2
+
+# L0 OVERRIDE via Delete and Modify
+echo "############################"
+echo "L0 OVERRIDE via Delete and Modify: "
+echo "############################"
+java -DBUS_DT=$ExecDate -Dlog4j.configuration=file://${PROPERTIES_DIR}/InputData_Collateral_log.properties -cp ${JAR_DIR}/OdsToolsMain-1.1.5_2.12-SNAPSHOT.jar com.bmo.cmrods.odstools.main.ODSToolsMain rulesBasedFeedFilterAndOverride ${PROPERTIES_DIR}/v_calypso_mpe_pos_L0_overrides.properties
+
+sleep 2
+# Rename Output File
+#mv ${JAR_DIR}/L0_V_CALYPSO_MPE_POS_LVL_COL_${ExecDate}_output.csv $OUTPUT_DIR/L0_V_CALYPSO_MPE_POS_LVL_COL_$ExecDate.csv 
+
+sleep 2
+# L0 Merge, L1 created in this step
+echo "############################"
+echo "L0 OVERRIDE via Merge/Add: "
+echo "############################"
+java -DBUS_DT=$ExecDate -Dlog4j.configuration=file://${PROPERTIES_DIR}/InputData_Collateral_log.properties -cp ${JAR_DIR}/OdsToolsMain-1.1.5_2.12-SNAPSHOT.jar com.bmo.cmrods.odstools.main.ODSToolsMain merge_csv_using_config ${PROPERTIES_DIR}/v_calypso_mpe_pos_L0_merge.properties
+
+sleep 2
+# L1 Augmentation
+echo "############################"
+echo "L1 Augmentation: "
+echo "############################"
+java -DBUS_DT=$ExecDate -Dlog4j.configuration=file://${PROPERTIES_DIR}/InputData_Collateral_log.properties -Dods.collateral.reference.file=${STATIC_DATA}/CollateralMappingTable.txt -cp ${JAR_DIR}/OdsToolsMain-1.1.5_2.12-SNAPSHOT.jar:${JAR_DIR}/ods-inputdata-calculator-1.0-SNAPSHOT.jar com.bmo.cmrods.odstools.main.ODSToolsMain transform_csv_v2 ${PROPERTIES_DIR}/v_calypso_mpe_pos_L1_augmentation.properties
+
+sleep 2
+# Rename Output File
+#mv $OUTPUT_DIR/L1_V_CALYPSO_MPE_POS_LVL_COL_${ExecDate}.csv $OUTPUT_DIR/L1_V_CALYPSO_MPE_POS_LVL_COL_${ExecDate}_orig.csv 
+
+# L1 Filter:
+echo "############################"
+echo "L1 Filter: "
+echo "############################"
+java -DBUS_DT=$ExecDate -Dlog4j.configuration=file://${PROPERTIES_DIR}/InputData_Collateral_log.properties -cp ${JAR_DIR}/OdsToolsMain-1.1.5_2.12-SNAPSHOT.jar com.bmo.cmrods.odstools.main.ODSToolsMain rulesBasedFeedFilterAndOverride ${PROPERTIES_DIR}/v_calypso_mpe_pos_L1_filters.properties
+
+sleep 2
+
+# L1 DQ:
+echo "############################"
+echo "L1 DQ: "
+echo "############################"
+java -DBUS_DATE=${ExecDate} -Dlog4j.configuration=file://${PROPERTIES_DIR}/InputData_Collateral_log.properties -cp ${JAR_DIR}/OdsToolsMain-1.1.5_2.12-SNAPSHOT.jar com.bmo.cmrods.odstools.main.ODSToolsMain rulesBasedFeedValidate ${PROPERTIES_DIR}/v_calypso_mpe_pos_L1_DQ.properties
+
+sleep 2
+# Rename Output File
+#mv $OUTPUT_DIR/L1_V_CALYPSO_MPE_POS_LVL_COL_${ExecDate}_output.csv $OUTPUT_DIR/L1_V_CALYPSO_MPE_POS_LVL_COL_${ExecDate}.csv 
+
+
+# Splitting into Two Files: CMRODS Standard Collateral & SACCR Billateral
+echo "############################"
+echo "Splitting into Two Files: CMRODS Standard Collateral & SACCR Billateral: "
+echo "############################"
+java -DBUS_DT=${ExecDate} -Dlog4j.configuration=file://${PROPERTIES_DIR}/InputData_Collateral_log.properties -cp ${JAR_DIR}/OdsToolsMain-1.1.5_2.12-SNAPSHOT.jar com.bmo.cmrods.odstools.main.ODSToolsMain transform_csv_v2 ${PROPERTIES_DIR}/Collateral_file_split.properties
+
+sleep 2
+
+mv "/apps/data/cmrods/output/inputData/Intermediate/augmentation/Standard Collateral File.txt" "/apps/data/cmrods/output/inputData/Standard Collateral File.txt"
+
+# L2 OVERRIDE via Delete and Modify, SACCR Only
+echo "############################"
+echo "L2 OVERRIDE via Delete and Modify, SACCR Only"
+echo "############################"
+java -DBUS_DT=${ExecDate} -Dlog4j.configuration=file://${PROPERTIES_DIR}/InputData_Collateral_log.properties -cp ${JAR_DIR}/OdsToolsMain-1.1.5_2.12-SNAPSHOT.jar com.bmo.cmrods.odstools.main.ODSToolsMain rulesBasedFeedFilterAndOverride ${PROPERTIES_DIR}/v_calypso_mpe_pos_L2_overrides.properties
+
+sleep 2
+
+# Rename output File
+#mv $OUTPUT_DIR/BMO_Collateral_Position_Summary_Bilateral_Report_${ExecDate}.txt $OUTPUT_DIR/BMO_Collateral_Position_Summary_Bilateral_Report_${ExecDate}_orig.txt
+#mv $OUTPUT_DIR/BMO_Collateral_Position_Summary_Bilateral_Report_${ExecDate}_output.txt $OUTPUT_DIR/BMO_Collateral_Position_Summary_Bilateral_Report_${ExecDate}_L2.txt
+
+# L2 OVERRIDE via Add/Merge, SACCR Only
+echo "############################"
+echo "L2 OVERRIDE via Add/Merge, SACCR Only"
+echo "############################"
+java -DBUS_DT=$ExecDate -Dlog4j.configuration=file://${PROPERTIES_DIR}/InputData_Collateral_log.properties -cp ${JAR_DIR}/OdsToolsMain-1.1.5_2.12-SNAPSHOT.jar com.bmo.cmrods.odstools.main.ODSToolsMain merge_csv_using_config ${PROPERTIES_DIR}/v_calypso_mpe_pos_L2_merge.properties
+
+sleep 2
+
+# L2 DQ:
+echo "############################"
+echo "L2 DQ:
+echo "############################"
+java -DBUS_DATE=${ExecDate} -Dlog4j.configuration=file://${PROPERTIES_DIR}/InputData_Collateral_log.properties -cp ${JAR_DIR}/OdsToolsMain-1.1.5_2.12-SNAPSHOT.jar com.bmo.cmrods.odstools.main.ODSToolsMain rulesBasedFeedValidate ${PROPERTIES_DIR}/v_calypso_mpe_pos_L2_DQ.properties
+
+sleep 2
+
+
+# Create Calypso Header
+java -DBUS_DT=$ExecDate -Dlog4j.configuration=file://${PROPERTIES_DIR}/InputData_Collateral_log.properties -cp ${JAR_DIR}/OdsToolsMain-1.1.5_2.12-SNAPSHOT.jar com.bmo.cmrods.odstools.main.ODSToolsMain transform_csv_v2 ${PROPERTIES_DIR}/BMO_Collateral_Position_Summary_Bilateral_Report_split.properties

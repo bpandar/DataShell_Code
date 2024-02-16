@@ -1,0 +1,11 @@
+Feed,Level,Severity,Rule,Attribute,Operator,Value,EffectiveDate,ExpirationDate,Validation Type,Threshold Type,Min Max,Comment,Notification
+v_endur_mpe_deal,Attribute,Warning,NONEMPTY,TOOLSET,,,,,Warning,Absolute,,TOOLSET cannot be null (e.g. each trade should belong to a product),CCRCapital@bmo.com
+v_endur_mpe_deal,Attribute,Warning,NONEMPTY,COUNTERPARTY,,,,,Warning,Absolute,,COUNTERPARTY cannot be null (e.g. each trade should belong to a COUNTERPARTY),CCRCapital@bmo.com
+v_endur_mpe_deal,Attribute,Warning,ISNUMBER,TOTAL_QUANTITY,,,,,Warning,Absolute,,TOTAL_QUANTITY should be numeric,CCRCapital@bmo.com
+v_endur_mpe_deal,Attribute,Warning,NONEMPTY,BUY_SELL,,,,,Warning,Absolute,,BUY_SELL cannot be null,CCRCapital@bmo.com
+v_endur_mpe_deal,Attribute,Warning,ISNUMBER,STRIKE,,,,,Warning,Absolute,,STRIKE should be numeric,CCRCapital@bmo.com
+v_endur_mpe_deal,Attribute,Warning,"{DATEFORMAT(REF2('TRADE_DATE'),'yyyy-mm-dd')}",,,,,,Warning,Absolute,,TRADE_DATE should be a valid date attributes,CCRCapital@bmo.com
+v_endur_mpe_deal,Attribute,Warning,"{DATEFORMAT(REF2('MATURITY_DATE'),'yyyy-mm-dd')}",,,,,,Warning,Absolute,,MATURITY_DATE should be a valid date attributes,CCRCapital@bmo.com
+v_endur_mpe_deal,Attribute,Warning,NONEMPTY,PROJECTION_INDEX,,,,,Warning,Absolute,,PROJECTION_INDEX cannot be null,CCRCapital@bmo.com
+v_endur_mpe_deal,Attribute,Warning,NONEMPTY,PORTFOLIO,,,,,Warning,Absolute,,PORTFOLIO cannot be null,CCRCapital@bmo.com
+v_endur_mpe_deal,Attribute,Warning,ISNUMBER,LIQUIDATION_VALUE,,,,,Warning,Absolute,,LIQUIDATION_VALUE should be numeric,CCRCapital@bmo.com

@@ -1,0 +1,71 @@
+#
+#if type not found, it will default to SELECT
+#batchsize is useful only for update or insert, it will trigger batch mode in ptrepared statement
+#a parameter type will always default to VARCHAR unless override is provided in "parametertypes" line below.
+#parameter names will be detected from suppliued SQL. parameter names follow pattern {{name}}
+#
+<sql-properties-begin>
+type=select
+batchsize=256
+parametertypes=DATA_DATE:date
+<sql-properties-end>
+
+#
+#actual templatized SQL statement
+#
+<sql-text-begin>
+SELECT
+    PRINCIPAL_LEGAL_ENTITY,
+    COUNTERPARTY_LEGAL_NAME,
+    AGREEMENT_TYPE,
+    COUNTERPARTY_CODE,
+    COLLATERAL_STATUS,
+    MARGIN_IND,
+    IA_GROSS_IND,
+    TRIM(REHYPOTHECATION_FLAG) as REHYPOTHECATION_FLAG,
+    CUSTODIAN_PO,
+    ISSUER,ISSUER_COUNTRY,
+    MARKET_SECTOR,
+    ISSUER_INDUSTRY,
+    SECURITY_TYP2,
+    PARENT_COMP_NAME,
+    CREDITRATING_S_AND_P,
+    CREDITRATING_MOODY,
+    CREDITRATING_FITCH,
+    CREDITRATING_DBRS,
+    PRD_DESCRIPTION,COUPON,
+    IS_ZEROCOUPON,
+    TO_CHAR(SECURITY_MATURITY_DATE,'YYYY-MM-DD') as MATURITY,
+    ISIN,
+    CUSIP,
+    HAIRCUT_PERCENTAGE,
+    COLLATERAL_CURRENCY,
+    NOTIONAL_AMOUNT,
+    PRE_HRCT_MKT_VAL_CLLTRL,
+    VALUE_AGREEMENT_CCY,
+    AGREEMENT_CURRENCY,
+    FX_RATE,
+    USD_FX_RATE,
+    VALUE_USD,
+    CAD_FX_RATE,
+    VALUE_CAD,
+    POST_HRCT_VAL_CLLTRL,
+    POST_HRCT_VAL_CLLTRL_AGRMT_CCY,
+    VALUE_POST_HAIRCUT_USD,
+    VALUE_POST_HAIRCUT_CAD,
+    ELIGIBLE_COLLATERAL_GROUP,
+    AGREEMENT_ID,
+    TO_CHAR(SECURITY_MATURITY_DATE,'YYYY-MM-DD') MATURITY_PAYMENT_DATE,
+    COLLATERAL_REFERENCE,
+    CUSTODIAN_LE,SECURED_PARTY,
+    BOOK
+FROM SDR.V_CALYPSO_MPE_POS_LVL_COL
+WHERE 1 = 1
+    -- AND AGREEMENT_TYPE not in ('GMRA','VM_Intraday','DEFAULT_FUND','MRA','Guarantee Cap','CLM')
+    AND JOB_EXECUTION_ID = (
+        select max(job_execution_id)
+        from SDR.V_CALYPSO_MPE_POS_LVL_COL
+        where DATA_DATE = {{DATA_DATE}}
+    )
+<sql-text-end>
+

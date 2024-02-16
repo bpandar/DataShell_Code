@@ -1,0 +1,26 @@
+Feed,Level,Severity,Rule,Attribute,Operator,Value,EffectiveDate,ExpirationDate,Validation Type,Threshold Type,Min Max,Comment,Notification
+SACCR_OSFI-BFG-NEW_filter;SACCR_OSFI-BFG-CARVEDIN_filter;SACCR_OSFI-BFG-CARVEDOUT_filter,Feed,Warning,RECORDCOUNT,,BT,,,,,,,The records count between CarvedIN+ CarvedOut should be equal to Osfi-Bfg-New,CCRCapital@bmo.com
+SACCR_OSFI-BFG-NEW_filter;SACCR_OSFI-BFG-CARVEDIN_filter;SACCR_OSFI-BFG-CARVEDOUT_filter,Feed,Warning,ABS_SUM,EAD,LT,1000000000,,,,,,The ABS sum of EAD value between CarvedIN+ CarvedOut-Osfi-Bfg-New should be less then 1B,CCRCapital@bmo.com
+SACCR_OSFI-BFG-NEW_filter,Attribute,Warning,SUM,EAD,BT,30000000000|45000000000,,,,,,SACCR_OSFI-BFG-NEW file Sum of EAD should be in the range of 30B to 45B for INT_EXT_IND=N,CCRCapital@bmo.com
+SACCR_OSFI-BFG-CARVEDIN_filter,Attribute,Warning,SUM,EAD,BT,25000000000|40000000000,,,,,,SACCR_OSFI-BFG-CARVEDIN file Sum of EAD should be in the range of 25B to 40B for INT_EXT_IND=N,CCRCapital@bmo.com
+SACCR_OSFI-BFG-CARVEDOUT_filter,Attribute,Warning,SUM,EAD,BT,5000000000|1000000000,,,,,,SACCR_OSFI-BFG-CARVEDOUT file Sum of EAD should be in the range of 5B to 10B for INT_EXT_IND=N,CCRCapital@bmo.com
+SACCR_OSFI-BFG-NEW_filter,Attribute,Warning,CONCAT_UNIQUE,SRC_SYS_CD|TRADE_ID,,,,,,,,The concatination of SRC_SYS_CD and TRADE_ID are unique for INT_EXT_IND=N,CCRCapital@bmo.com
+SACCR_OSFI-BFG-CARVEDIN_filter,Attribute,Warning,CONCAT_UNIQUE,SRC_SYS_CD|TRADE_ID,,,,,,,,The concatination of SRC_SYS_CD and TRADE_ID are unique for INT_EXT_IND=N,CCRCapital@bmo.com
+SACCR_OSFI-BFG-CARVEDOUT_filter,Attribute,Warning,CONCAT_UNIQUE,SRC_SYS_CD|TRADE_ID,,,,,,,,The concatination of SRC_SYS_CD and TRADE_ID are unique for INT_EXT_IND=N,CCRCapital@bmo.com
+SACCR_OSFI-CHN_filter,Attribute,Warning,CONCAT_UNIQUE,SRC_SYS_CD|TRADE_ID,,,,,,,,The concatination of SRC_SYS_CD and TRADE_ID are unique for INT_EXT_IND=N,CCRCapital@bmo.com
+SACCR_EBA-BME_filter,Attribute,Warning,CONCAT_UNIQUE,SRC_SYS_CD|TRADE_ID,,,,,,,,The concatination of SRC_SYS_CD and TRADE_ID are unique for INT_EXT_IND=N,CCRCapital@bmo.com
+SACCR_OSFI-BFG-NEW_filter,Feed,Warning,SUM_DELTA_PERCENT,EAD,LT,20,,,,,,SACCR_OSFI-BFG-NEW file absolute Diff between Sum(EAD_i) and Sum(EAD_i-1) delta percentage should be less than 20%,CCRCapital@bmo.com
+SACCR_OSFI-BFG-CARVEDIN_filter,Feed,Warning,SUM_DELTA_PERCENT,EAD,LT,20,,,,,,SACCR_OSFI-BFG-CARVEDIN file absolute Diff between Sum(EAD_i) and Sum(EAD_i-1) delta percentage should be less than 20%,CCRCapital@bmo.com
+SACCR_OSFI-BFG-CARVEDOUT_filter,Feed,Warning,SUM_DELTA_PERCENT,EAD,LT,20,,,,,,SACCR_OSFI-BFG-CARVEDOUT file absolute Diff between Sum(EAD_i) and Sum(EAD_i-1) delta percentage should be less than 20%,CCRCapital@bmo.com
+SACCR_OSFI-CHN_filter,Feed,Warning,SUM_DELTA_PERCENT,EAD,LT,20,,,,,,SACCR_OSFI-CHN file absolute Diff between Sum(EAD_i) and Sum(EAD_i-1) delta percentage should be less than 20%,CCRCapital@bmo.com
+SACCR_EBA-BME_filter,Feed,Warning,SUM_DELTA_PERCENT,EAD,LT,20,,,,,,SACCR_OSFI-BME file absolute Diff between Sum(EAD_i) and Sum(EAD_i-1) delta percentage should be less than 20%,CCRCapital@bmo.com
+SACCR_OSFI-BFG-NEW_filter,Attribute,Warning,CONCAT_GROUP,CPTY_CD|UEN,,,,,,,,One CPTY_CD has one unique UEN cross the feed for INT_EXT_IND=N,CCRCapital@bmo.com
+SACCR_OSFI-BFG-CARVEDIN_filter,Attribute,Warning,CONCAT_GROUP,CPTY_CD|UEN,,,,,,,,One CPTY_CD has one unique UEN cross the feed for INT_EXT_IND=N,CCRCapital@bmo.com
+SACCR_OSFI-BFG-CARVEDOUT_filter,Attribute,Warning,CONCAT_GROUP,CPTY_CD|UEN,,,,,,,,One CPTY_CD has one unique UEN cross the feed for INT_EXT_IND=N,CCRCapital@bmo.com
+SACCR_OSFI-CHN_filter,Attribute,Warning,CONCAT_GROUP,CPTY_CD|UEN,,,,,,,,One CPTY_CD has one unique UEN cross the feed for INT_EXT_IND=N,CCRCapital@bmo.com
+SACCR_EBA-BME_filter,Attribute,Warning,CONCAT_GROUP,CPTY_CD|UEN,,,,,,,,One CPTY_CD has one unique UEN cross the feed for INT_EXT_IND=N,CCRCapital@bmo.com
+MAPG_OVRD,Attribute,Warning,CONCAT_UNIQUE,RUN_TYPE|OVRD_TYPE|OVRD_TYPE_VALUE|OVRD_ATTRIBUTE,,,,,,,,"The concatination of RUN_TYPE ,OVRD_TYPE ,OVRD_TYPE_VALUE, and OVRD_ATTRIBUTE must be unique",CCRCapital@bmo.com
+LITES.CVA.SENS.BFG,Attribute,Warning,SUM_GROUP,SENSITIVITY_AMOUNT|RISK_TYPE,LE,3000000000,,,,,,Sum of SENSITIVITY_AMOUNT cannot be greater than 3B for each RISK_TYPE except Risk_Credit,CCRCapital@bmo.com
+LITES.CVA.HEDGE.BFG,Attribute,Warning,SUM_GROUP,SENSITIVITY_AMOUNT|RISK_TYPE,LE,3000000000,,,,,,Sum of SENSITIVITY_AMOUNT cannot be greater than 3B for each RISK_TYPE except Risk_Credit,CCRCapital@bmo.com
+LITES.CVA.HEDGE.BFG,Attribute,Warning,SUM_GROUP_DELTA_PERCENT,SENSITIVITY_AMOUNT|RISK_TYPE|BUCKET|QUALIFIER,LT,20,,,,,,"Absolute Relative Diff between Sum(SENSITIVITY_AMOUNT_i) and Sum(SENSITIVITY_AMOUNT_i-1) for each combination of RISK_TYPE, BUCKET, and QUALIFIER  should be less than 20%",CCRCapital@bmo.com
+LITES.CVA.SENS.BFG,Attribute,Warning,SUM_GROUP_DELTA_PERCENT,SENSITIVITY_AMOUNT|RISK_TYPE|BUCKET|QUALIFIER,LT,20,,,,,,"Absolute Relative Diff between Sum(SENSITIVITY_AMOUNT_i) and Sum(SENSITIVITY_AMOUNT_i-1) for each combination of RISK_TYPE, BUCKET, and QUALIFIER  should be less than 20%",CCRCapital@bmo.com

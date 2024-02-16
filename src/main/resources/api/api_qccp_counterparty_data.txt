@@ -1,0 +1,30 @@
+#
+#if type not found, it will default to SELECT
+#batchsize is useful only for update or insert, it will trigger batch mode in ptrepared statement
+#a parameter type will always default to VARCHAR unless override is provided in "parametertypes" line below.
+#parameter names will be detected from suppliued SQL. parameter names follow pattern {{name}}
+#
+<sql-properties-begin>
+type=select
+batchsize=256
+parametertypes=DATA_DATE:date
+<sql-properties-end>
+
+#
+#actual templatized SQL statement
+#
+<sql-text-begin>
+SELECT
+  CPTY_CD,
+  ROUND(KCMI*NVL(FX_KCMI.RATE,1)/FX_BASE.RATE,6) KCMI,
+  ROUND(GUARANTY_FUND*NVL(FX_PFDF.RATE,1)/FX_BASE.RATE,6) PFDF,
+  ROUND(UNFUNDED_DEFAULT_FUND*NVL(FX_UFDF.RATE,1)/FX_BASE.RATE,6) UFDF,
+  GROUP_KEY_DEFAULT_FUND
+FROM SA_CCR.RF_CCP_MARGIN A
+LEFT JOIN SA_CCR.MKT_FX_DATA FX_BASE ON FX_BASE.BUS_DT = {{DATA_DATE}} AND FX_BASE.TENOR_CD = 'S' AND FX_BASE.CCY_PAIR = 'CADUSD'
+LEFT JOIN SA_CCR.MKT_FX_DATA FX_KCMI ON FX_KCMI.BUS_DT = {{DATA_DATE}} AND FX_KCMI.TENOR_CD = 'S' AND FX_KCMI.CCY_PAIR = KCMI_CCY||'USD'
+LEFT JOIN SA_CCR.MKT_FX_DATA FX_PFDF ON FX_PFDF.BUS_DT = {{DATA_DATE}} AND FX_PFDF.TENOR_CD = 'S' AND FX_PFDF.CCY_PAIR = GUARANTY_FUND_CCY||'USD'
+LEFT JOIN SA_CCR.MKT_FX_DATA FX_UFDF ON FX_UFDF.BUS_DT = {{DATA_DATE}} AND FX_UFDF.TENOR_CD = 'S' AND FX_UFDF.CCY_PAIR = GUARANTY_FUND_CCY||'USD'
+WHERE START_DT <= {{DATA_DATE}} AND END_DT > {{DATA_DATE}}
+ORDER BY CPTY_CD
+<sql-text-end>

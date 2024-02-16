@@ -1,0 +1,19 @@
+Feed,Level,Severity,Rule,Attribute,Operator,Value,EffectiveDate,ExpirationDate,Validation Type,Threshold Type,Min Max,Comment,Notification
+ccr_trade,Attribute,Critical,NONEMPTY,M_NB,,,,,Warning,Absolute,,ccr_trade_yyyymmdd-FX LST: M_NB is empty,CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,NONEMPTY,M_TP_CNTRP,,,,,Warning,Absolute,,ccr_trade_yyyymmdd-FX LST: M_TP_CNTRP is empty,CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,"{M_TP_BUY in ['S','B']}",M_TP_BUY,,,,,Warning,Absolute,,"ccr_trade_yyyymmdd-FX LST: M_TP_BUY is neither ""S"" nor ""B""",CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,"{M_TP_CP in ['C','P']}",M_TP_CP,,,,,Warning,Absolute,,"ccr_trade_yyyymmdd-FX LST: M_TP_CP is neither ""C"" nor ""P""",CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,"{M_TP_AE in ['A','E']}",M_TP_AE,,,,,Warning,Absolute,,"ccr_trade_yyyymmdd-FX LST: M_TP_AE is neithe ""A"" nor ""E""",CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,{ISNUMBER(M_TP_IQTY)},M_TP_IQTY,,,,,Warning,Absolute,,ccr_trade_yyyymmdd-FX LST: M_TP_IQTYT is not in numeric format,CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,{ISNUMBER(M_TPSECLOT)},M_TPSECLOT,,,,,Warning,Absolute,,ccr_trade_yyyymmdd-FX LST: M_TPSECLO is not in numeric format,CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,{len(M_TP_SPOTN) == 7},M_TP_SPOTN,,,,,Warning,Absolute,,ccr_trade_yyyymmdd-FX LST: M_TP_SPOTN is not 7 in length,CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,{ISNUMBER(M_TP_STRIKE)},M_TP_STRIKE,,,,,Warning,Absolute,,ccr_trade_yyyymmdd-FX LST: M_TP_STRIKE is not in numeric format,CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,"{DATEFORMAT(M_TP_DTETRN,'dd/MM/yy')}",M_TP_DTETRN,,,,,Warning,Absolute,,ccr_trade_yyyymmdd-FX LST:M_TP_DTETRN is not in date format(Murex Date format is 21/06/18 - DD/MM/YY,CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,"{DATEFORMAT(M_TP_DTEPMT,'dd/MM/yy')}",M_TP_DTEPMT,,,,,Warning,Absolute,,ccr_trade_yyyymmdd-FX LST: M_TP_DTEPMT is not in date format,CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,"{DATEFORMAT(M_TP_DTEEXP,'dd/MM/yy')}",M_TP_DTEEXP,,,,,Warning,Absolute,,ccr_trade_yyyymmdd-FX LST:M_TP_DTEEXP is not in date format,CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,"{DATEFORMAT(M_TP_IPAYDTE,'dd/MM/yy')}",M_TP_IPAYDTE,,,,,Warning,Absolute,,ccr_trade_yyyymmdd-FX LST:M_TP_IPAYDTE is not in date format,CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,{ISNUMBER(M_TP_QTYEQ)},M_TP_QTYEQ,,,,,Warning,Absolute,,ccr_trade_yyyymmdd-FX LST:M_TP_QTYEQ is not in numeric format,CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,{ISNUMBER(M_TP_LQTYtw)},M_TP_LQTYtw,,,,,Warning,Absolute,,ccr_trade_yyyymmdd-FX LST:M_TP_LQTY2 is not in numeric format,CCRCapital@bmo.com
+ccr_trade,Attribute,Critical,NONEMPTY,M_TP_PFOLIO,,,,,Warning,Absolute,,ccr_trade_yyyymmdd-FX LST: M_TP_PFOLIO is empty,CCRCapital@bmo.com
+ccr_pl,Attribute,Critical,{ISNUMBER(MTM)},MTM,,,,,Warning,Absolute,,ccr_pl_yyyymmdd-FX LST:MTM is not in numeric format,CCRCapital@bmo.com
+ccr_pl,Attribute,Critical,{len(M_C_CUR_PL) == 3},M_C_CUR_PL,,,,,Warning,Absolute,,ccr_pl_yyyymmdd-FX LST:M_C_CUR_PL is not 3 in length,CCRCapital@bmo.com

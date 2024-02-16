@@ -1,0 +1,6 @@
+﻿Feed,Columns,Rule,Target,Value,Action,EffectiveDate,ExpirationDate
+SACCR_OSFI-BFG-NEW,INT_EXT_IND,N,,,Filter,,
+SACCR_OSFI-BFG-CARVEDIN,INT_EXT_IND,N,,,Filter,,
+SACCR_OSFI-BFG-CARVEDOUT,INT_EXT_IND,N,,,Filter,,
+SACCR_OSFI-CHN,INT_EXT_IND,N,,,Filter,,
+SACCR_EBA-BME,INT_EXT_IND,N,,,Filter,,

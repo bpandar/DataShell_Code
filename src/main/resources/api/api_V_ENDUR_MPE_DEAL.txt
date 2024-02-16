@@ -1,0 +1,125 @@
+#
+#if type not found, it will default to SELECT
+#batchsize is useful only for update or insert, it will trigger batch mode in ptrepared statement
+#a parameter type will always default to VARCHAR unless override is provided in "parametertypes" line below.
+#parameter names will be detected from suppliued SQL. parameter names follow pattern {{name}}
+#
+<sql-properties-begin>
+type=select
+batchsize=2048
+parametertypes=DATA_DATE:date
+<sql-properties-end>
+
+#
+#actual templatized SQL statement
+#
+<sql-text-begin>
+SELECT
+    DATA_DATE,
+    DEAL_ID,
+    TRANSACTION_ID,
+    COMPOSER_ID,
+    MUREX_ID,
+    USER_ID,
+    PORTFOLIO,
+    BUSINESS_UNIT,
+    RESPONSIBILITY_CENTRE,
+    BOOKING_LOCATION,
+    COUNTERPARTY,
+    OTC_COUNTERPARTY,
+    BIC_CODE,
+    TEMPLATE,
+    TOOLSET,
+    INS_TYPE,
+    CONTRACT_CODE,
+    REFERENCE_SOURCE,
+    PROJECTION_INDEX,
+    BUY_SELL,
+    PUT_CALL,
+    OPTION_TYPE,
+    UNIT,
+    SETTLEMENT_TYPE,
+    FIX_FLOAT,
+    CATEGORY,
+    INTERNAL_EXTERNAL,
+    LEG_STATUS,
+    TRADE_DATE,
+    FIRST_RESET_DATE,
+    LAST_RESET_DATE,
+    MATURITY_DATE,
+    PREMIUM_DATE,
+    PAYMENT_DATE,
+    CURRENCY,
+    PRICE,
+    STRIKE,
+    TOTAL_QUANTITY,
+    LIVE_QUANTITY,
+    LIVE_NOTIONAL,
+    BMO_HISTORIC_CASH,
+    BMO_CURRENT_CASH,
+    UNDISCOUNTED_MTM,
+    DISCOUNTED_MTM,
+    BMO_FUTURE_CASH,
+    LIQUIDATION_VALUE,
+    PV_EFFECT,
+    PREMIUM,
+    BMO_PNL,
+    MTD_PNL,
+    BMO_HISTORIC_CASH_USD,
+    BMO_CURRENT_CASH_USD,
+    UNDISCOUNTED_MTM_USD,
+    DISCOUNTED_MTM_USD,
+    BMO_FUTURE_CASH_USD,
+    LIQUIDATION_VALUE_USD,
+    PV_EFFECT_USD,
+    PREMIUM_USD,
+    BMO_PNL_USD,
+    MTD_PNL_USD,
+    DELTA,
+    GAMMA,
+    VEGA,
+    THETA,
+    RHO_LIBOR_USD,
+    RHO_FOREIGN_CCY,
+    FX_DELTA,
+    CURRENCY_EXPOSURE,
+    CURRENCY_UNREALIZED_EXPOSURE,
+    PRICING_MODEL,
+    BROKER,
+    BROKER_CLEARING,
+    BROKER_FEES,
+    MARKETING_LOCATION,
+    MARKETER,
+    MARTKETING_RATE,
+    MARKETING_REVENUE,
+    COUNTERPARTY_TYPE,
+    ADAPTIV_CODE,
+    ADAPTIV_RATING,
+    CREDIT_NETTING,
+    BANKING_CUSTOMER,
+    NUMBER_PERIODS,
+    ECONFIRM,
+    ORDER_BOOL,
+    CVA_VALUE,
+    CVA_RATE,
+    CASH_TYPE,
+    TRADER_ID,
+    TRADE_TIME,
+    REFERENCE,
+    NEXT_PAYMENT,
+    MR_TERMINATION_FEES,
+    MR_TERMINATION_DATES,
+    MR_CORRECTION_DATE,
+    BO_RATE,
+    BO_REVENUE,
+    JOB_EXECUTION_ID,
+    DATA_PRELIM
+FROM SDR.V_ENDUR_MPE_DEAL
+WHERE 1 = 1
+    AND JOB_EXECUTION_ID = (
+        select max(job_execution_id)
+        from SDR.V_ENDUR_MPE_DEAL
+        where DATA_DATE = {{DATA_DATE}}
+    )
+<sql-text-end>
+

@@ -1,0 +1,14 @@
+SourceSystem|SRC_SYS_CD
+Auto Adjustment|Auto Adjustment
+Balancing Entries|Balancing Entries
+Calypso|CALYPSO
+Endur|MXCOM
+FC Adjustments|FC Adjustments
+FC Journal Entries|FC Journal Entries
+GMI|GMI
+Imagine|IMAGINE
+Manual Input|Manual Input
+Murex|CURRPLUS
+Nesbitt|Nesbitt
+TraderEH|NONCORE_IBG
+WSS|WSS

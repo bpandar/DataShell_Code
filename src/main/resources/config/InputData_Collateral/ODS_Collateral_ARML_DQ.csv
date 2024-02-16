@@ -1,0 +1,50 @@
+Feed,Level,Severity,Rule,Attribute,Operator,Value,EffectiveDate,ExpirationDate,Validation Type,Threshold Type,Min Max,Comment,Notification
+CSA_CPTY_exposure,Feed,Warning,RECORDCOUNT,,BT,10000|13000,,,,,,CSA_CPTY_exposure file records count is between 10000 and  12000,CCRCapital@bmo.com
+CSA_CPTY_exposure_filter,Feed,Feed,RECORDCOUNT,,BT,2000|3000,,,,,,CSA_CPTY_exposure_filter file records count is between 3000 and  4000,CCRCapital@bmo.com
+CSA_CPTY_exposure,Attribute,Warning,NONEMPTY,Principal,,,,,,,,CSA_CPTY_exposure file column Principal cannot be empty,CCRCapital@bmo.com
+CSA_CPTY_exposure,Attribute,Warning,NONEMPTY,Secured Party,,,,,,,,CSA_CPTY_exposure file column Secured Party cannot be null,CCRCapital@bmo.com
+CMG_Agreements_CSA,Feed,Warning,RECORDCOUNT,,BT,9000|10000,,,,,,CMG Agreements CSA file records count is between 9000 and 10000,CCRCapital@bmo.com
+CMG_Agreements_CSA,Attribute,Warning,NONEMPTY,Contract ID,,,,,,,,CMG Agreements CSA column Contract should not be empty,CCRCapital@bmo.com
+CMG_Agreements_CSA_filter,Feed,Warning,RECORDCOUNT,,BT,2000|3000,,,,,,CMG Agreements CSA_filter file records count is between 3000 and 40000,CCRCapital@bmo.com
+CMG_Agreements_CSA,Attribute,Warning,{ISNUMBER(REF2('Contract ID'))},Contract ID,,,,,,,,CMG Agreements CSA column Contract should be a number,CCRCapital@bmo.com
+CMG_Agreements_CSA,Feed,Critical,RECORDCOUNT,,GE,11000,,,,,,CMG Agreements CSA file records count is greater than 9000,CCRCapital@bmo.com
+CMG_Agreements_CSA,Feed,Warning,RECORDCOUNT,,LT,3000,,,,,,CMG Agreements CSA file records count is less than 10000,CCRCapital@bmo.com
+CMG_Agreements_CSA,Feed,Warning,RECORDCOUNT_DELTA,,LT,100,,,,,,CMG Agreements CSA file delta is less than 100,CCRCapital@bmo.com
+CMG_Agreements_CSA,Feed,Critical,RECORDCOUNT_DELTA_PERCENT_ABS,,LT,0.05,,,,,,CMG Agreements CSA file delta percentage is less than 5%,CCRCapital@bmo.com
+CMG_Agreements_CSA,Feed,Warning,Distinct,,LT,5000,,,,,,CMG Agreements CSA file  distinct records are less than 5000,CCRCapital@bmo.com
+BMO_Collateral_Position_Summary_Bilateral_Report,Feed,Critical,RECORDCOUNT,,BT,3000|5000,,,,,,BMO Collateral Position Summary Bilateral Report records count is between 3000 and  5000,CCRCapital@bmo.com
+BMO_Collateral_Position_Summary_Bilateral_Report,Attribute,Warning,NONEMPTY,PROJECTION_INDEX,,,,,,,,BMO Collateral Position Summary Bilateral Report column PROJECTION_INDEX should be a number,CCRCapital@bmo.com
+InternalCollateralAgreements,Feed,Critical,RECORDCOUNT,,BT,3200|4000,,,,,,InternalCollateralAgreements_Diff file records count is between 3400 and 4000,CCRCapital@bmo.com
+InternalCollateralAgreements,Feed,Critical,"{REF2('Identification\Reference') in ['PROVON\BFG\PROVON - BMO ISDA\PROVON - BMO ISDA CSA','RBC\BFG\RBC - BMO ISDA\RBC - BMO ISDA REG VM CSA', 'CIBC\BFG\CIBC - BMO ISDA\CIBC - BMO ISDA REG VM CSA'] if REF2('Attributes\Active') == 'Yes' else True}",,,,,,,,,Active flag equal to Yes and Identification\Reference in List,CCRCapital@bmo.com
+InternalCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Agreement Validity\End Date'))},,,,,,,,,Agreement Validity\End Date is not null,CCRCapital@bmo.com
+InternalCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Agreement Validity\Start Date'))},,,,,,,,,Agreement Validity\Start Date is not null,CCRCapital@bmo.com
+InternalCollateralAgreements_1,Attribute,Info,{NONEMPTY(REF2('Deal Validility\First Trading Date'))},,,,,,,,,Deal Validility\First Trading Date not null,CCRCapital@bmo.com
+InternalCollateralAgreements_1,Attribute,Info,{NONEMPTY(REF2('Deal Validility\Last Trading Date'))},,,,,,,,,Deal Validility\Last Trading Date not null,CCRCapital@bmo.com
+InternalCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Attributes\Active'))},,,,,,,,,Attributes\Active is not null,CCRCapital@bmo.com
+InternalCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Attributes\Agreement Base Currency'))},,,,,,,,,Attributes\Agreement Base Currency is not null,CCRCapital@bmo.com
+InternalCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Attributes\Counterparty MTA'))},,,,,,,,,Attributes\Counterparty MTA is not null,CCRCapital@bmo.com
+InternalCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Attributes\Host MTA'))},,,,,,,,,Attributes\Host MTA is not null,CCRCapital@bmo.com
+InternalCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Attributes\Independent Amount Mode'))},,,,,,,,,Attributes\Independent Amount Mode is not null,CCRCapital@bmo.com
+InternalCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Attributes\Net Collateral Ccy'))},,,,,,,,,Attributes\Net Collateral Ccy is not null,CCRCapital@bmo.com
+InternalCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Identification\Reference'))},,,,,,,,,Identification\Reference is not null,CCRCapital@bmo.com
+InternalCollateralAgreements,Attribute,Warning,{NONEMPTY(REF2('Regulatory Margin Period\Applicable Regulatory Margin Period'))},,,,,,,,,Regulatory Margin Period\Applicable Regulatory Margin Period is not null,CCRCapital@bmo.com
+InternalCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Regulatory Margin Period\Illiquid Collateral'))},,,,,,,,,Regulatory Margin Period\Illiquid Collateral is not null,CCRCapital@bmo.com
+InternalCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Regulatory Margin Period\Re-margining Frequency'))},,,,,,,,,Regulatory Margin Period\Re-margining Frequency is not null,CCRCapital@bmo.com
+pre-defined_list,Attribute,Warning,"MATCH(Identification\Reference,${SOURCE_DIR}/Admin.InternalCollateralAgreements_filter.csv,)",Identification\Reference,,,,,,,,Identification_Reference from pre-defined list does not match any of the Identification_Reference in InternalCollateralAgreements,
+RegulatoryCollateralAgreements,Feed,Critical,RECORDCOUNT,,BT,3200|4000,,,,,,InternalCollateralAgreements_Diff file records count is between 3400 and 4000,CCRCapital@bmo.com
+RegulatoryCollateralAgreements,Feed,Critical,"{REF2('Identification\Reference') in ['PROVON\BFG\PROVON - BMO ISDA\PROVON - BMO ISDA CSA','RBC\BFG\RBC - BMO ISDA\RBC - BMO ISDA REG VM CSA', 'CIBC\BFG\CIBC - BMO ISDA\CIBC - BMO ISDA REG VM CSA'] if REF2('Attributes\Active') == 'Yes' else True}",,,,,,,,,Active flag equal to Yes and Identification\Reference in List,CCRCapital@bmo.com
+RegulatoryCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Agreement Validity\End Date'))},,,,,,,,,Agreement Validity\End Date is not null,CCRCapital@bmo.com
+RegulatoryCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Agreement Validity\Start Date'))},,,,,,,,,Agreement Validity\Start Date is not null,CCRCapital@bmo.com
+RegulatoryCollateralAgreements_1,Attribute,Info,{NONEMPTY(REF2('Deal Validility\First Trading Date'))},,,,,,,,,Deal Validility\First Trading Date not null,CCRCapital@bmo.com
+RegulatoryCollateralAgreements_1,Attribute,Info,{NONEMPTY(REF2('Deal Validility\Last Trading Date'))},,,,,,,,,Deal Validility\Last Trading Date not null,CCRCapital@bmo.com
+RegulatoryCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Attributes\Active'))},,,,,,,,,Attributes\Active is not null,CCRCapital@bmo.com
+RegulatoryCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Attributes\Agreement Base Currency'))},,,,,,,,,Attributes\Agreement Base Currency is not null,CCRCapital@bmo.com
+RegulatoryCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Attributes\Counterparty MTA'))},,,,,,,,,Attributes\Counterparty MTA is not null,CCRCapital@bmo.com
+RegulatoryCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Attributes\Host MTA'))},,,,,,,,,Attributes\Host MTA is not null,CCRCapital@bmo.com
+RegulatoryCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Attributes\Independent Amount Mode'))},,,,,,,,,Attributes\Independent Amount Mode is not null,CCRCapital@bmo.com
+RegulatoryCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Attributes\Net Collateral Ccy'))},,,,,,,,,Attributes\Net Collateral Ccy is not null,CCRCapital@bmo.com
+RegulatoryCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Identification\Reference'))},,,,,,,,,Identification\Reference is not null,CCRCapital@bmo.com
+RegulatoryCollateralAgreements,Attribute,Warning,{NONEMPTY(REF2('Regulatory Margin Period\Applicable Regulatory Margin Period'))},,,,,,,,,Regulatory Margin Period\Applicable Regulatory Margin Period is not null,CCRCapital@bmo.com
+RegulatoryCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Regulatory Margin Period\Illiquid Collateral'))},,,,,,,,,Regulatory Margin Period\Illiquid Collateral is not null,CCRCapital@bmo.com
+RegulatoryCollateralAgreements,Attribute,Info,{NONEMPTY(REF2('Regulatory Margin Period\Re-margining Frequency'))},,,,,,,,,Regulatory Margin Period\Re-margining Frequency is not null,CCRCapital@bmo.com
+pre-defined_list,Attribute,Warning,"MATCH(Identification\Reference,${SOURCE_DIR}/Admin.RegulatoryCollateralAgreements_filter.csv,)",Identification\Reference,,,,,,,,Identification_Reference from pre-defined list does not match any of the Identification_Reference in RegulatoryCollateralAgreements,

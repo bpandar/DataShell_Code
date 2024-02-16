@@ -1,0 +1,59 @@
+Feed,Level,Severity,Rule,Attribute,Operator,Value,EffectiveDate,ExpirationDate,Validation Type,Threshold Type,Min Max,Comment,Notification
+bcl_report,Attribute,Warning,{NONEMPTY(REC_TYP) and REC_TYP=='BDY'},N.A.,,,,,Warning,Absolute,,"REC_TYP cannot be null and is hardcoded to ""BDY""",CCRCapital@bmo.com
+bcl_report,Attribute,Warning,{NONEMPTY(SRC_SYS_ID) and SRC_SYS_ID=='IBGC'},N.A.,,,,,Warning,Absolute,,"SRC_SYS_ID cannot be null and is SRC_SYS_ID is hardcoded to ""IBGC""",CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,DERIV_EXP_TRANS_ID,,,,,Warning,Absolute,,DERIV_EXP_TRANS_ID cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,TRD_SRC_SYS_ID,,,,,Warning,Absolute,,TRD_SRC_SYS_ID cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,RESP_NODE,,,,,Warning,Absolute,,RESP_NODE cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,TRANSIT_NO,,,,,Warning,Absolute,,TRANSIT_NO cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,BAL_AMT_CURR_CD,,,,,Warning,Absolute,,BAL_AMT_CURR_CD cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,BSL_AST_CLS,,,,,Warning,Absolute,,BSL_AST_CLS cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,OSFI_EXP_TYP,,,,,Warning,Absolute,,OSFI_EXP_TYP cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,OSFI_DERIV_INST_TYP,,,,,Warning,Absolute,,OSFI_DERIV_INST_TYP cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,CNTRY_ULT_RISK_CD,,,,,Warning,Absolute,,CNTRY_ULT_RISK_CD cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,HLD_TRD_BK_IND,,,,,Warning,Absolute,,HLD_TRD_BK_IND cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,PRIM_BRWR_IND,,,,,Warning,Absolute,,PRIM_BRWR_IND cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,BRWR_RISK_RTG,,,,,Warning,Absolute,,BRWR_RISK_RTG cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,CDN_SIC_CD,,,,,Warning,Absolute,,CDN_SIC_CD cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,SUB_PER_NET_IND,,,,,Warning,Absolute,,SUB_PER_NET_IND cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,CALC_METH_TYP,,,,,Warning,Absolute,,CALC_METH_TYP cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,DFT_EXP_IND,,,,,Warning,Absolute,,DFT_EXP_IND cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,TERM_TO_MAT_DT,,,,,Warning,Absolute,,TERM_TO_MAT_DT cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,BAL_AMT,,,,,Warning,Absolute,,BAL_AMT cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,REPL_CST_BFR_NET_AMT_CURR_CD,,,,,Warning,Absolute,,REPL_CST_BFR_NET_AMT_CURR_CD cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,REPL_CST_BFR_NET_AMT,,,,,Warning,Absolute,,REPL_CST_BFR_NET_AMT cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,INTR_BNK_CNTRPRTY_IND,,,,,Warning,Absolute,,INTR_BNK_CNTRPRTY_IND cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,{NONEMPTY(BSL_REC_TYP) and BSL_REC_TYP=='EXP'},N.A.,,,,,Warning,Absolute,,"BSL_REC_TYP cannot be null and BSL_REC_TYP is hardcoded to ""EXP""",CCRCapital@bmo.com
+bcl_report,Attribute,Warning,{NONEMPTY(VAR_REC_IND) and VAR_REC_IND=='N'},N.A.,,,,,Warning,Absolute,,"VAR_REC_IND cannot be null and VAR_REC_IND is hardcoded to ""N""",CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,RW_PRE_CRM,,,,,Warning,Absolute,,RW_PRE_CRM cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,RW_POST_CRM,,,,,Warning,Absolute,,RW_POST_CRM cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,GUAR_CR_DERIV_OR_COLL_IND,,,,,Warning,Absolute,,GUAR_CR_DERIV_OR_COLL_IND cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,BOR_RRS_CD,,,,,Warning,Absolute,,BOR_RRS_CD cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,BLTRL_IND,,,,,Warning,Absolute,,BLTRL_IND cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,CCP_IND,,,,,Warning,Absolute,,CCP_IND cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,QCCP_IND,,,,,Warning,Absolute,,QCCP_IND cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,AVC_APLBL_IND,,,,,Warning,Absolute,,AVC_APLBL_IND cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,BCAR_RPTG_CGY,,,,,Warning,Absolute,,BCAR_RPTG_CGY cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,EXP_RRM,,,,,Warning,Absolute,,EXP_RRM cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,SA_CCR_EFF_NTNL_AMT,,,,,Warning,Absolute,,SA_CCR_EFF_NTNL_AMT cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,SA_CCR_REPL_CST_AMT,,,,,Warning,Absolute,,SA_CCR_REPL_CST_AMT cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,SA_CCR_POT_EXP_AMT,,,,,Warning,Absolute,,SA_CCR_POT_EXP_AMT cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,MRGN_IND,,,,,Warning,Absolute,,MRGN_IND cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,SA_CCR_AST_CLS_CGY,,,,,Warning,Absolute,,SA_CCR_AST_CLS_CGY cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,FAC_PRIM_TYP,,,,,Warning,Absolute,,FAC_PRIM_TYP cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,FAC_BOOK_TRANSIT_NBR,,,,,Warning,Absolute,,FAC_BOOK_TRANSIT_NBR cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,FAC_COMMIT_IND,,,,,Warning,Absolute,,FAC_COMMIT_IND cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,FAC_SHARED_LINK_IND,,,,,Warning,Absolute,,FAC_SHARED_LINK_IND cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,FAC_STATUS_CD,,,,,Warning,Absolute,,FAC_STATUS_CD cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,FAC_CASH_MSEC_TYP,,,,,Warning,Absolute,,FAC_CASH_MSEC_TYP cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,FAC_PRIM_COLL_TYP,,,,,Warning,Absolute,,FAC_PRIM_COLL_TYP cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,FAC_SNR_PROF_TYP,,,,,Warning,Absolute,,FAC_SNR_PROF_TYP cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,FAC_SYN_IND,,,,,Warning,Absolute,,FAC_SYN_IND cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,FAC_SYN_ROLE_CD,,,,,Warning,Absolute,,FAC_SYN_ROLE_CD cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,FAC_AUTH_AMT,,,,,Warning,Absolute,,FAC_AUTH_AMT cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,NONEMPTY,RATE_AGNC_NAME,,,,,Warning,Absolute,,RATE_AGNC_NAME cannot be null,CCRCapital@bmo.com
+bcl_report,Attribute,Warning,"{NONEMPTY(CR_VALTN_ADJ_AMT_CURR_CD) if OSFI_EXP_TYP in ['OTCDRV', 'EXCDRV'] and (EMPTY(QCCP_IND) or QCCP_IND == 'N') else True}",N.A.,,,,,Warning,Absolute,,"CR_VALTN_ADJ_AMT_CURR_CD cannot be null if OSFI_EXP_TYP is OTCDRV or EXCDRV, and QCCP_IND is null or 'N'.",CCRCapital@bmo.com
+bcl_report,Attribute,Warning,"{(NONEMPTY(GL_ACCT_NO) and len(GL_ACCT_NO) == 9) if (BSL_REC_TYP=='EXP' and HLD_TRD_BK_IND=='Y' and OSFI_EXP_TYP in ['OTCDRV','EXCDRV']) else True}",N.A.,,,,,Warning,Absolute,,"GL_ACCT_NO cannot be null and must be 9 characters in length, for BSL_REC_TYP =""EXP"", and HLD_TRD_BK_IND =""Y"", and OSFI_EXP_TYP: OTCDRV/EXCDRV",CCRCapital@bmo.com
+bcl_report,Attribute,Warning,"{(NONEMPTY(HLD_TRD_BK_IND) and HLD_TRD_BK_IND in ['Y','N','M']) if OSFI_EXP_TYP in ['REPOST','OTCDRV','EXCDRV'] else True}",N.A.,,,,,Warning,Absolute,,"HLD_TRD_BK_IND must be 'Y', 'N' or 'M' for OSFI_EXP_TYP REPOST/OTCDRV/EXCDRV, and cannot be null.",CCRCapital@bmo.com
+bcl_report,Attribute,Warning,{NONEMPTY(CR_VALTN_ADJ_AMT) if QCCP_IND != 'Y' else True},N.A.,,,,,Warning,Absolute,,CR_VALTN_ADJ_AMT cannot be null if QCCP_IND <> 'Y',CCRCapital@bmo.com
+bcl_report,Attribute,Warning,{RSK_TYP_CD.upper()=='DER'},N.A.,,,,,Warning,Absolute,,"RSK_TYP_CD is hardcoded to ""DER""",
+bcl_report,Attribute,Warning,{LNDR_HOST_CD.upper()=='BMO'},N.A.,,,,,Warning,Absolute,,"LNDR_HOST_CD is hardcoded to ""BMO""",

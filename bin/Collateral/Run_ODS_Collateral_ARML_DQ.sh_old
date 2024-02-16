@@ -1,0 +1,221 @@
+#!/bin/bash
+# Run commands : sh Run_ODS_Collateral_ARML_DQ.sh 1 20221012
+
+source ~/.bashrc
+
+# 20220630 format
+JobFqn=$1
+ExecDate=$2
+JobId=$3
+WorkspaceDir=$4
+LogDir=$5
+StagingDir=$6
+OutputDir=$7
+JobParamFile=$8
+
+BUS_DT=${ExecDate}
+echo "Business Date: $BUS_DT"
+
+mkdir -p /apps/data/cmrods/output/FIS/BMOCollateral/intermediate
+mkdir -p /apps/data/cmrods/output/inputData/DQ/Collateral
+mkdir -p /apps/data/cmrods/input/inputData
+
+chmod -R 755 /apps/data/cmrods/output/FIS/BMOCollateral/intermediate/
+chmod -R 755 /apps/data/cmrods/output/inputData/DQ/Collateral/
+
+INPUT_DIR=/apps/data/cmrods/input/inputData
+SOURCE_DIR=/apps/data/cmrods/output/FIS/BMOCollateral
+OUTPUT_DIR=/apps/data/cmrods/output/FIS/BMOCollateral/intermediate
+PROPERTIES_DIR=/apps/cmrods/sacva_apms/conf/InputData_Collateral/properties
+CONFIG_DIR=/apps/cmrods/sacva_apms/conf/InputData_Collateral/config
+JAR_DIR=/apps/cmrods/sacva_apms/lib
+TEMP_DIR=/apps/data/cmrods/tmp
+
+JAR_NAME=OdsToolsMain-1.1.5_2.12-SNAPSHOT.jar
+MAIN_PROGRAM=com.bmo.cmrods.odstools.main.ODSToolsMain;export MAIN_PROGRAM
+DQ_FUNCTION=rulesBasedFeedValidate
+FILTER_OVRD_FUNCTION=rulesBasedFeedFilterAndOverride
+ARMLTOCSV_FUNCTION=save_arml_attributes_to_csv_using_config_file
+ARML_FILTER_FUNCTION=arml_filter_and_override_using_config_file
+
+#CSV properties..
+BMOCOLL_DQ_PROPERTY=${PROPERTIES_DIR}/ODS_BMO_Collateral_Position_DQ.properties
+CMGAGREE_DQ_PROPERTY=${PROPERTIES_DIR}/ODS_CMG_Agreements_CSA_DQ.properties
+CSACPTY_DQ_PROPERTY=${PROPERTIES_DIR}/ODS_CSA_CPTY_exposure_DQ.properties
+CSACPTY_FILTER_PROPERTY=${PROPERTIES_DIR}/ODS_CSA_CPTY_Filters.properties
+
+#ARML Properties...
+ARMLTOCSV_PROPERTY=${PROPERTIES_DIR}/ODS_Collateral_ARML_to_csv_full.properties
+ARML_FILTER_PROPERTY=${PROPERTIES_DIR}/ODS_Collateral_ARML_Filters.properties
+ARML_DQ_PROPERTY=${PROPERTIES_DIR}/ODS_Collateral_ARML_DQ.properties
+PREDEFINED_DQ_PROPERTY=${PROPERTIES_DIR}/ODS_Collateral_PredefinedList_DQ.properties
+
+#========== Removing Old Result Files =============
+
+rm -rf /apps/data/cmrods/output/FIS/BMOCollateral/intermediate/*
+rm -rf /apps/data/cmrods/output/inputData/DQ/Collateral/*
+rm -rf /apps/data/cmrods/input/inputData/BMO_Collateral_Position_Summary_Bilateral_Report*
+rm -rf /apps/data/cmrods/input/inputData/CMG_Agreements_CSA*
+rm -rf /apps/data/cmrods/input/inputData/CSA_CPTY_exposure*
+
+#==================================================
+
+checkFileExist(){
+  echo "Checking file present ..."
+    if [ ! -f $1 ]; then
+      echo " File not Exist... $1
+              Please check the input directory."
+      exit 1
+    else
+      echo " File Exist... $1
+              Copy csv file into inputdata folder.."
+      cp $1 ${INPUT_DIR}
+    fi
+}
+
+checkCommandStatus(){
+  if [ "$1" != "0" ]; then
+     echo "ERROR while executing $2 . Error message=$3 "
+     exit 1
+  else
+     echo "INFO: Successfull $1 "
+  fi
+}
+
+executeCommand(){
+  echo ""
+  CMD=$1
+  errorMsg=$($CMD)
+  exeCode="$?"
+  checkCommandStatus $exeCode $CMD $errorMsg
+  sleep 2
+  echo ""
+  rm -rf ${TEMP_DIR}/Jython*
+  rm -rf ${TEMP_DIR}/TempPython*
+}
+
+#===============copy input feeds from below location into Inputdata location===============
+echo "=============== Copying Input CSV Files ... `date`==============="
+CALYPSO_INPUT_DIR=/apps/data/cmrods/input/FIS/calypso
+
+BMO_COLL_POSITN=${CALYPSO_INPUT_DIR}/BMO_Collateral_Position_Summary_Bilateral_Report_${BUS_DT}.txt
+CMG_AGREE_CSA=${CALYPSO_INPUT_DIR}/CMG_Agreements_CSA_${BUS_DT}.csv
+CSA_CPTY_EXPOSURE=${CALYPSO_INPUT_DIR}/CSA_CPTY_exposure_${BUS_DT}.txt
+
+echo " Input Directory for csv files: $CALYPSO_INPUT_DIR"
+echo "Required csv files : $BMO_COLL_POSITN
+	$CMG_AGREE_CSA
+	$CSA_CPTY_EXPOSURE"
+
+# Define a list of files to check
+FILE_LIST=$BMO_COLL_POSITN,$CMG_AGREE_CSA,$CSA_CPTY_EXPOSURE
+
+# Use comma as separator and apply as pattern
+for FILE in ${FILE_LIST//,/ }
+  do
+   echo "ls $FILE"
+   checkFileExist $FILE
+  done
+echo "=============== File Copy Completed... `date`==============="
+echo ""
+#===============================================================================================
+
+LOG4J="-Dlog4j.configuration=file://${PROPERTIES_DIR}/InputData_Collateral_ARML_log.properties"
+USER_ARGUM="java -DBUS_DT=${BUS_DT} ${LOG4J}"; export VM_ARGUM
+OPTS_ARGUM="-cp ${JAR_DIR}/${JAR_NAME} ${MAIN_PROGRAM}"; export OPTS_ARGUM
+
+echo "===============  Processing csv file........`date`==============="
+CSV_FILES=${CSACPTY_DQ_PROPERTY},${CMGAGREE_DQ_PROPERTY},${BMOCOLL_DQ_PROPERTY}
+
+# Apply Filter on Input files....
+FILE_KEY="CSA_CPTY_exposure"
+CSA_FILTER="${USER_ARGUM} -DSOURCE_FILE=${CSA_CPTY_EXPOSURE} -DFILE_KEY=${FILE_KEY} ${OPTS_ARGUM} ${FILTER_OVRD_FUNCTION} ${CSACPTY_FILTER_PROPERTY}"
+echo "######## Apply CSA_CPTY_exposure Filter : #########"
+echo "$CSA_FILTER"
+echo "################################################"
+executeCommand "$CSA_FILTER"
+
+# Apply DQ on ODS_CSA_CPTY_exposure_{BUS_DT}.txt
+CSA_DQ="${USER_ARGUM} ${OPTS_ARGUM} ${DQ_FUNCTION} ${CSACPTY_DQ_PROPERTY}"
+echo "######## Apply CSA_CPTY_exposure DQ : #########"
+echo "$CSA_DQ"
+echo "################################################"
+executeCommand "$CSA_DQ"
+
+# Apply DQ on ODS_CMG_Agreements_CSA_{BUS_DT}.csv
+CMG_DQ="${USER_ARGUM} ${OPTS_ARGUM} ${DQ_FUNCTION} ${CMGAGREE_DQ_PROPERTY}"
+echo "######## Apply ODS_CMG_Agreements_CSA DQ : ################"
+echo "$CMG_DQ"
+echo "###########################################################"
+executeCommand "$CMG_DQ"
+
+# Apply DQ on BMO_Collateral_Position_Summary_Bilateral_Report_{BUS_DT}.txt
+BMOCOLL_DQ="${USER_ARGUM} ${OPTS_ARGUM} ${DQ_FUNCTION} ${BMOCOLL_DQ_PROPERTY}"
+echo "######## Apply BMO_Collateral_Position_Summary_Bilateral_Report DQ : ########"
+echo "$BMOCOLL_DQ"
+echo "############################################################"
+executeCommand "$BMOCOLL_DQ"
+
+echo "=============== csv file validation end........`date`==============="
+
+
+
+ARML_FILES="InternalCollateralAgreements,RegulatoryCollateralAgreements"
+echo ""
+
+for FILE in ${ARML_FILES//,/ }; do
+  echo "=============== Processing ${FILE} file........`date`==============="
+
+  # apply filter on Admin.InternalCollateralAgreements_$BUSINESS_DATE$.Diff.xml to get Admin.InternalCollateralAgreements_$BUSINESS_DATE$_filter.xml
+  ARML_FILTER="${USER_ARGUM} -DSOURCE_FILE=${FILE} ${OPTS_ARGUM} ${ARML_FILTER_FUNCTION} ${ARML_FILTER_PROPERTY}"
+  echo "######### ${FILE} ARML Filter: #########"
+  echo "$ARML_FILTER"
+  echo "###########################################################"
+  executeCommand "$ARML_FILTER"
+
+  # transform Admin.InternalCollateralAgreements_$BUSINESS_DATE$_filter.xml into .csv
+  ARMLTOCSV="java ${LOG4J} -DSOURCE_FILE=${FILE} ${OPTS_ARGUM} ${ARMLTOCSV_FUNCTION} ${ARMLTOCSV_PROPERTY}"
+  echo "########## Convert ${FILE} ARML into CSV: #########"
+  echo "$ARMLTOCSV"
+  echo "##########################################################"
+  executeCommand "$ARMLTOCSV"
+
+  # apply DQ on Admin.InternalCollateralAgreements_$BUSINESS_DATE$_filter.csv
+  ARML_DQ="${USER_ARGUM} -DSOURCE_FILE=${FILE} ${OPTS_ARGUM} ${DQ_FUNCTION} ${ARML_DQ_PROPERTY}"
+  echo "########## Apply ${FILE} ARML DQ : ############"
+  echo "$ARML_DQ"
+  echo "##########################################################"
+  executeCommand "$ARML_DQ"
+
+  echo "=============== ${FILE} file validation completed........`date`==============="
+  echo ""
+done
+
+sleep 2
+
+echo ""
+# apply DQ on pre-defined_list.csv
+PREDEFINED_DQ="${USER_ARGUM} ${OPTS_ARGUM} ${DQ_FUNCTION} ${PREDEFINED_DQ_PROPERTY}"
+echo "########## Pre-defined list DQ: #########################"
+echo "$PREDEFINED_DQ"
+echo "##########################################################"
+executeCommand "$PREDEFINED_DQ"
+
+sleep 2
+
+# Combine DQ results into one file
+tail -n +2  ${OUTPUT_DIR}/pre-defined_list_${BUS_DT}.detail.dq.csv >>  ${OUTPUT_DIR}/Admin.InternalCollateralAgreements_filter_${BUS_DT}.detail.dq.csv
+tail -n +2  ${OUTPUT_DIR}/pre-defined_list_${BUS_DT}.summary.dq.csv >>  ${OUTPUT_DIR}/Admin.InternalCollateralAgreements_filter_${BUS_DT}.summary.dq.csv
+
+# Copy results to final output folder
+cp ${OUTPUT_DIR}/Admin.InternalCollateralAgreements_filter_${BUS_DT}.detail.dq.csv ${SOURCE_DIR}/Admin.InternalCollateralAgreements_${BUS_DT}.detail.dq.csv
+cp ${OUTPUT_DIR}/Admin.InternalCollateralAgreements_filter_${BUS_DT}.summary.dq.csv ${SOURCE_DIR}/Admin.InternalCollateralAgreements_${BUS_DT}.summary.dq.csv
+
+# Providing permission to results files.
+echo "INFO: Permission change to 755 for folders post execution completed...."
+chmod -R 755 ${SOURCE_DIR}/
+chmod -R 755 ${OUTPUT_DIR}/
+chmod -R 755 /apps/data/cmrods/output/inputData/DQ/Collateral/
+chmod -R 755 /apps/data/cmrods/output/inputData/logs/
+
+echo " ===============  Task Completed =============== `date`"

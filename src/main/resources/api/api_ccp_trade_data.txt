@@ -1,0 +1,32 @@
+#
+#if type not found, it will default to SELECT
+#batchsize is useful only for update or insert, it will trigger batch mode in ptrepared statement
+#a parameter type will always default to VARCHAR unless override is provided in "parametertypes" line below.
+#parameter names will be detected from suppliued SQL. parameter names follow pattern {{name}}
+#
+<sql-properties-begin>
+type=select
+batchsize=256
+parametertypes=DATA_DATE:date
+<sql-properties-end>
+
+#
+#actual templatized SQL statement
+#
+<sql-text-begin>
+WITH RC AS (
+    SELECT BUS_DT, MAX(RUN_ID) AS RUN_ID FROM SA_CCR.RC_RUN_CNTRL 
+    WHERE BUS_DT = {{DATA_DATE}} AND CALC_TYPE = 'OSFI-BFG-NEW' AND STATE NOT IN ('RUNNING')
+    GROUP BY BUS_DT
+)
+SELECT
+  A.TRADE_ID || '-' || A.SRC_SYS_CD AS UTI,
+  A.CPTY_CD,
+  A.EAD,
+  0.02 AS QCCP_RW,     -- This attribute will be available in SACCR Release 4.8
+  0.2 AS NON_QCCP_RW   -- This attribute will be available in SACCR Release 4.8
+FROM SA_CCR.TG_SACCR_REPORT A
+JOIN RC ON RC.BUS_DT = A.BUS_DT AND RC.RUN_ID = A.RUN_ID
+WHERE A.QCCP_IND = 'Y' AND A.INT_EXT_CD = 'E'
+<sql-text-end>
+

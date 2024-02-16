@@ -1,0 +1,11 @@
+﻿Feed,Level,Severity,Rule,Attribute,Operator,Value,EffectiveDate,ExpirationDate,Validation Type,Threshold Type,Min Max,Comment,Notification
+CM_Finance,Feed,Warning,RECORDCOUNT_DELTA_PERCENT,,ge,20,,,Threshold,Percentage,,Finance file size is at most 20% change month over month,CCRCapital@bmo.com
+CM_Finance,Feed,Warning,RECORDCOUNT,,ge,150000,,,Threshold,Absolute,,Number of records in finance data cannot be less than 150000,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,NONEMPTY,GL,,,,,Warning,Absolute,,GL cannot be null,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,NONEMPTY,RespCentre,,,,,Warning,Absolute,,RespCentre cannot be null,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,NONEMPTY,BookingTransit,,,,,Warning,Absolute,,BookingTransit cannot be null,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,NONEMPTY,Currency,,,,,Warning,Absolute,,Currency cannot be null,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,"{ISNUMBER(CDE_NPV.replace(',',''))}",CDE_NPV,,,,,Warning,Absolute,,CDE_NPV should be float,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,"{ISNUMBER(TC_NPV.replace(',',''))}",TC_NPV,,,,,Warning,Absolute,,TC_NPV should be float,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,"{ISNUMBER(CDE_Notional_Value.replace(',',''))}",CDE_Notional_Value,,,,,Warning,Absolute,,CDE_Notional_Value should be float,CCRCapital@bmo.com
+CM_Finance,Attribute,Warning,"{ISNUMBER(TC_Notional_Value.replace(',',''))}",TC_Notional_Value,,,,,Warning,Absolute,,TC_Notional_Value should be float,CCRCapital@bmo.com

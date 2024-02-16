@@ -1,0 +1,68 @@
+﻿Feed,Level,Severity,Rule,Attribute,Operator,Value,EffectiveDate,ExpirationDate,Validation Type,Threshold Type,Min Max,Comment,Notification
+PotentialExposure,Feed,Critical,RECORDCOUNT,,BT,8000|10000,,,,,,PotentialExposure file records count is between 8000 and 10000,CCRCapital@bmo.com
+PotentialExposure,Attribute,Warning,{NONEMPTY(REF2('AdaptivCode'))},,,,,,,,,AdaptivCode is not null,CCRCapital@bmo.com
+CCP_UEN_Connection,Feed,Critical,RECORDCOUNT,,BT,10|100,,,,,,CCP_UEN_Connection file records count is between 10 and 100,CCRCapital@bmo.com
+CCP_UEN_Connection,Attribute,Warning,{NONEMPTY(REF2('UEN'))},,,,,,,,,UEN is not null,CCRCapital@bmo.com
+CMRODS_ExposureData,Feed,Critical,RECORDCOUNT,,BT,8000|10000,,,,,,CMRODS_ExposureData file records count is between 8000 and 10000,CCRCapital@bmo.com
+CMRODS_ExposureData,Attribute,Warning,{NONEMPTY(REF2('AdaptivCode'))},,,,,,,,,AdaptivCode is not null,CCRCapital@bmo.com
+baskets.sql,Attribute,Critical,"{NONEMPTY(REF2('BUY_SELL')) and REF2('BUY_SELL') in ['B', 'S'] }",,,,,,,,,BUY_SELL cannot be Null and value should be B & S,CCRCapital@bmo.com
+baskets.sql,Attribute,Critical,{NONEMPTY(REF2('SRC_SYS_CD'))},,,,,,,,,SRC_SYS_CD cannot be Null,CCRCapital@bmo.com
+baskets.sql,Attribute,Critical,{NONEMPTY(REF2('TRADE_ID'))},,,,,,,,,TRADE_ID cannot be Null,CCRCapital@bmo.com
+baskets.sql,Attribute,Critical,{NONEMPTY(REF2('SEC_SYMBOL'))},,,,,,,,,SEC_SYMBOL cannot be Null,CCRCapital@bmo.com
+baskets.sql,Attribute,Critical,{NONEMPTY(REF2('BSKT_NAME'))},,,,,,,,,BSKT_NAME cannot be Null,CCRCapital@bmo.com
+baskets.sql,Attribute,Critical,{NONEMPTY(REF2('UNDRLY_SEC_SYMBOL'))},,,,,,,,,UNDRLY_SEC_SYMBOL cannot be Null,CCRCapital@bmo.com
+baskets.sql,Attribute,Critical,{NONEMPTY (REF2('BSKT_CCY_CD')) and len(REF2('BSKT_CCY_CD')) == 3 },,,,,,,,,BSKT_CCY_CD cannot be Null and length should be 3,CCRCapital@bmo.com
+baskets.sql,Attribute,Critical,{NONEMPTY(REF2('MKT_NOTIONAL')) and REF2('MKT_NOTIONAL') not in ['0']},,,,,,,,,MKT_NOTIONAL cannot be Null and value not zero,CCRCapital@bmo.com
+Calypso_cds.sql,Attribute,Critical,{NONEMPTY(REF2('TRADE_ID'))},,,,,,,,,TRADE_ID cannot be Null,CCRCapital@bmo.com
+Calypso_cds.sql,Attribute,Critical,{NONEMPTY(REF2('SRC_SYS_CD'))},,,,,,,,,SRC_SYS_CD cannot be Null,CCRCapital@bmo.com
+Calypso_cds.sql,Attribute,Critical,"{NONEMPTY(REF2('BUY_SELL')) and REF2('BUY_SELL') in ['B', 'S'] }",,,,,,,,,BUY_SELL cannot be Null and value should be B & S,CCRCapital@bmo.com
+Calypso_cds.sql,Attribute,Critical,{NONEMPTY(REF2('CPTY_CD'))},,,,,,,,,CPTY_CD cannot be Null,CCRCapital@bmo.com
+Calypso_cds.sql,Attribute,Warning,{NONEMPTY(REF2('RSPNSBTY_CENTRE'))},,,,,,,,,RSPNSBTY_CENTRE cannot be Null,CCRCapital@bmo.com
+Calypso_cds.sql,Attribute,Warning,{NONEMPTY(REF2('TRANSIT'))},,,,,,,,,TRANSIT cannot be Null,CCRCapital@bmo.com
+Calypso_cds.sql,Attribute,Critical,{NONEMPTY(REF2('PRODUCT'))},,,,,,,,,PRODUCT cannot be Null,CCRCapital@bmo.com
+Calypso_cds.sql,Attribute,Warning,NONEMPTY(REF2('NOTIONAL')),,,,,,,,,NOTIONAL cannot be Null,CCRCapital@bmo.com
+eq_der_gmi.sql,Attribute,Critical,{NONEMPTY(REF2('SRC_SYS_CD'))},,,,,,,,,SRC_SYS_CD cannot be Null,CCRCapital@bmo.com
+eq_der_gmi.sql,Attribute,Critical,"{NONEMPTY(REF2('BUY_SELL')) and REF2('BUY_SELL') in ['B', 'S'] }",,,,,,,,,BUY_SELL cannot be Null and value should be B & S,CCRCapital@bmo.com
+eq_der_gmi.sql,Attribute,Warning,{NONEMPTY(REF2('RSPNSBTY_CENTRE'))},,,,,,,,,RSPNSBTY_CENTRE cannot be Null,CCRCapital@bmo.com
+eq_der_gmi.sql,Attribute,Warning,{NONEMPTY(REF2('TRANSIT'))},,,,,,,,,TRANSIT cannot be Null,CCRCapital@bmo.com
+eq_der_gmi.sql,Attribute,Critical,{NONEMPTY(REF2('PRODUCT'))},,,,,,,,,PRODUCT cannot be Null,CCRCapital@bmo.com
+eq_der_gmi.sql,Attribute,Warning,{NONEMPTY(REF2('NOTIONAL'))},,,,,,,,,NOTIONAL cannot be Null,CCRCapital@bmo.com
+eq_der_imagine.sql,Attribute,Critical,{NONEMPTY(REF2('SRC_SYS_CD'))},,,,,,,,,SRC_SYS_CD cannot be Null,CCRCapital@bmo.com
+eq_der_imagine.sql,Attribute,Critical,"{NONEMPTY(REF2('BUY_SELL')) and REF2('BUY_SELL') in ['B', 'S'] }",,,,,,,,,BUY_SELL cannot be Null and value should be B & S,CCRCapital@bmo.com
+eq_der_imagine.sql,Attribute,Warning,{NONEMPTY(REF2('RSPNSBTY_CENTRE'))},,,,,,,,,RSPNSBTY_CENTRE cannot be Null,CCRCapital@bmo.com
+eq_der_imagine.sql,Attribute,Warning,{NONEMPTY(REF2('TRANSIT'))},,,,,,,,,TRANSIT cannot be Null,CCRCapital@bmo.com
+eq_der_imagine.sql,Attribute,Critical,{NONEMPTY(REF2('PRODUCT'))},,,,,,,,,PRODUCT cannot be Null,CCRCapital@bmo.com
+eq_der_imagine.sql,Attribute,Warning,{NONEMPTY(REF2('NOTIONAL'))},,,,,,,,,NOTIONAL cannot be Null,CCRCapital@bmo.com
+eq_der_swapone.sql,Attribute,Critical,{NONEMPTY(REF2('SRC_SYS_CD'))},,,,,,,,,SRC_SYS_CD cannot be Null,CCRCapital@bmo.com
+eq_der_swapone.sql,Attribute,Critical,"{NONEMPTY(REF2('BUY_SELL')) and REF2('BUY_SELL') in ['B', 'S'] }",,,,,,,,,BUY_SELL cannot be Null and value should be B & S,CCRCapital@bmo.com
+eq_der_swapone.sql,Attribute,Warning,{NONEMPTY(REF2('RSPNSBTY_CENTRE'))},,,,,,,,,RSPNSBTY_CENTRE cannot be Null,CCRCapital@bmo.com
+eq_der_swapone.sql,Attribute,Warning,{NONEMPTY(REF2('TRANSIT'))},,,,,,,,,TRANSIT cannot be Null,CCRCapital@bmo.com
+eq_der_swapone.sql,Attribute,Critical,{NONEMPTY(REF2('PRODUCT'))},,,,,,,,,PRODUCT cannot be Null,CCRCapital@bmo.com
+eq_der_swapone.sql,Attribute,Warning,{NONEMPTY(REF2('NOTIONAL'))},,,,,,,,,NOTIONAL cannot be Null,CCRCapital@bmo.com
+eq_der_tradereh1.sql,Attribute,Critical,{NONEMPTY(REF2('SRC_SYS_CD'))},,,,,,,,,SRC_SYS_CD cannot be Null,CCRCapital@bmo.com
+eq_der_tradereh1.sql,Attribute,Critical,"{NONEMPTY(REF2('BUY_SELL')) and REF2('BUY_SELL') in ['B', 'S'] }",,,,,,,,,BUY_SELL cannot be Null and value should be B & S,CCRCapital@bmo.com
+eq_der_tradereh1.sql,Attribute,Warning,{NONEMPTY(REF2('RSPNSBTY_CENTRE'))},,,,,,,,,RSPNSBTY_CENTRE cannot be Null,CCRCapital@bmo.com
+eq_der_tradereh1.sql,Attribute,Warning,{NONEMPTY(REF2('TRANSIT'))},,,,,,,,,TRANSIT cannot be Null,CCRCapital@bmo.com
+eq_der_tradereh1.sql,Attribute,Critical,{NONEMPTY(REF2('PRODUCT'))},,,,,,,,,PRODUCT cannot be Null,CCRCapital@bmo.com
+eq_der_tradereh1.sql,Attribute,Warning,{NONEMPTY(REF2('NOTIONAL'))},,,,,,,,,NOTIONAL cannot be Null,CCRCapital@bmo.com
+eq_der_tradereh2.sql,Attribute,Critical,{NONEMPTY(REF2('SRC_SYS_CD'))},,,,,,,,,SRC_SYS_CD cannot be Null,CCRCapital@bmo.com
+eq_der_tradereh2.sql,Attribute,Critical,"{NONEMPTY(REF2('BUY_SELL')) and REF2('BUY_SELL') in ['B', 'S'] }",,,,,,,,,BUY_SELL cannot be Null and value should be B & S,CCRCapital@bmo.com
+eq_der_tradereh2.sql,Attribute,Warning,{NONEMPTY(REF2('RSPNSBTY_CENTRE'))},,,,,,,,,RSPNSBTY_CENTRE cannot be Null,CCRCapital@bmo.com
+eq_der_tradereh2.sql,Attribute,Warning,{NONEMPTY(REF2('TRANSIT'))},,,,,,,,,TRANSIT cannot be Null,CCRCapital@bmo.com
+eq_der_tradereh2.sql,Attribute,Critical,{NONEMPTY(REF2('PRODUCT'))},,,,,,,,,PRODUCT cannot be Null,CCRCapital@bmo.com
+eq_der_tradereh2.sql,Attribute,Warning,{NONEMPTY(REF2('NOTIONAL'))},,,,,,,,,NOTIONAL cannot be Null,CCRCapital@bmo.com
+calypsoTlock.sql,Attribute,Critical,{NONEMPTY(REF2('SRC_SYS_CD'))},,,,,,,,,SRC_SYS_CD cannot be Null,CCRCapital@bmo.com
+calypsoTlock.sql,Attribute,Critical,"{NONEMPTY(REF2('BUY_SELL')) and REF2('BUY_SELL') in ['B', 'S'] }",,,,,,,,,BUY_SELL cannot be Null and value should be B & S,CCRCapital@bmo.com
+calypsoTlock.sql,Attribute,Warning,{NONEMPTY(REF2('RSPNSBTY_CENTRE'))},,,,,,,,,RSPNSBTY_CENTRE cannot be Null,CCRCapital@bmo.com
+calypsoTlock.sql,Attribute,Warning,{NONEMPTY(REF2('TRANSIT'))},,,,,,,,,TRANSIT cannot be Null,CCRCapital@bmo.com
+calypsoTlock.sql,Attribute,Critical,{NONEMPTY(REF2('PRODUCT'))},,,,,,,,,PRODUCT cannot be Null,CCRCapital@bmo.com
+calypsoTlock.sql,Attribute,Warning,{NONEMPTY(REF2('NOTIONAL'))},,,,,,,,,NOTIONAL cannot be Null,CCRCapital@bmo.com
+gfi.sql,Attribute,Critical,{NONEMPTY(REF2('SRC_SYS_CD'))},,,,,,,,,SRC_SYS_CD cannot be Null,CCRCapital@bmo.com
+gfi.sql,Attribute,Critical,"{NONEMPTY(REF2('BUY_SELL')) and REF2('BUY_SELL') in ['B', 'S'] }",,,,,,,,,BUY_SELL cannot be Null and value should be B & S,CCRCapital@bmo.com
+gfi.sql,Attribute,Warning,{NONEMPTY(REF2('RSPNSBTY_CENTRE'))},,,,,,,,,RSPNSBTY_CENTRE cannot be Null,CCRCapital@bmo.com
+gfi.sql,Attribute,Warning,{NONEMPTY(REF2('TRANSIT'))},,,,,,,,,TRANSIT cannot be Null,CCRCapital@bmo.com
+gfi.sql,Attribute,Critical,{NONEMPTY(REF2('PRODUCT'))},,,,,,,,,PRODUCT cannot be Null,CCRCapital@bmo.com
+gfi.sql,Attribute,Warning,{NONEMPTY(REF2('NOTIONAL'))},,,,,,,,,NOTIONAL cannot be Null,CCRCapital@bmo.com
+saccr_override.sql,Attribute,Warning,{NONEMPTY(REF2('TRANSIT'))},,,,,,,,,TRANSIT cannot be Null,CCRCapital@bmo.com
+saccr_override.sql,Attribute,Warning,{NONEMPTY(REF2('NOTIONAL'))},,,,,,,,,NOTIONAL cannot be Null,CCRCapital@bmo.com
+v_mtm_agg_enhanced.sql,Attribute,Warning,{NONEMPTY(REF2('NOTIONAL'))},,,,,,,,,NOTIONAL cannot be Null,CCRCapital@bmo.com

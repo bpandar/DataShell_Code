@@ -1,0 +1,2 @@
+java -cp c:/pilot_input-data/OdsToolsMain-1.1.5_2.12-SNAPSHOT-20220921.jar com.bmo.cmrods.odstools.main.ODSToolsMain rulesBasedFeedValidate c:/pilot_input-data/DQ/properties/ods_murex_dq_ccr_trade_dq.properties
+java -cp c:/pilot_input-data/OdsToolsMain-1.1.5_2.12-SNAPSHOT-20220921.jar com.bmo.cmrods.odstools.main.ODSToolsMain rulesBasedFeedValidate c:/pilot_input-data/DQ/properties/ods_murex_dq_ccr_pl_dq.properties
